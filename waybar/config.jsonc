@@ -26,15 +26,15 @@
         "disk"
     ],
     "modules-center": [
-        "wlr/workspaces",
+        "clock"
         // "idle_inhibitor",
-        "tray"
     ],
     "modules-right": [
+        // "tray",
         "battery",
         "backlight",
-        "network",
         "pulseaudio",
-        "clock"
-    ],
+        "network",
+        "wlr/workspaces"
+    ]
 }

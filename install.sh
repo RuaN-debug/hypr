@@ -39,10 +39,11 @@ packages=(
     python38
     python39
     python310
+    bash-completion
 )
 
 # Install packages using yay with --noconfirm option
-yay -Syu --needed --noconfirm "${packages[@]}"guake --save-preferences config.conf 
+yay -Syu --needed --noconfirm "${packages[@]}" guake --save-preferences config.conf 
 
 # Apply the Papirus-Dark theme to Papirus-Folders
 papirus-folders -C cat-mocha-green --theme Papirus-Dark
