@@ -136,6 +136,13 @@ window#waybar.hidden {
 	animation-direction: alternate;
 }
 
+.custom-spotify {
+    padding: 0 10px;
+    margin: 0 4px;
+    background-color: #23b86d;
+    color: black;
+}
+
 /** ********** Custom ********** **/
 /** Common style **/
 #backlight,

@@ -8,9 +8,10 @@
             "1": "",
             "2": "",
             // "3": "",
+            "3": "♫",
             "8": "󰑆",
             "9": "󰙯",
-            "active": "",
+            "active": ""
             // "urgent": "",
             // "default": ""
         },
@@ -36,7 +37,7 @@
         "on-update": "",
         "on-scroll-up": "light -A 5%",
         "on-scroll-down": "light -U 5%",
-        "smooth-scrolling-threshold": 1,
+        "smooth-scrolling-threshold": 1
     },
     // waybar-battery
     "battery": {
@@ -51,7 +52,7 @@
             "good": 70,
             "warning": 40,
             "low": 25,
-            "critical": 10,
+            "critical": 10
         },
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
@@ -143,7 +144,7 @@
     "network": {
         "interval": 5,
         //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
-        "format-wifi": " {essid}",
+        "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
         "format-ethernet": " Wired",
         "format-linked": " {ifname} (No IP)",
         "format-disconnected": "睊 Disconnected",
@@ -192,5 +193,14 @@
         "icon-size": 16,
         "spacing": 10,
         "reverse-direction": true
+    },
+    // waybar-spotify
+    "custom/spotify": {
+        "exec": "/usr/bin/python3 ~/.config/hypr/waybar/mediaplayer.py --player spotify",
+        "format": "{}  ",
+        "return-type": "json",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
     }
 }

@@ -40,6 +40,7 @@ packages=(
     python39
     python310
     bash-completion
+    spotify
 )
 
 # Install packages using yay with --noconfirm option
