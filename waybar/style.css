@@ -33,6 +33,9 @@ window#waybar.hidden {
 /** ********** Clock ********** **/
 #clock {
 	color: @Lavender;
+	font-size: 13px;
+    font-weight: bold;
+    padding: 0 10px;
 }
 
 /** ********** CPU ********** **/

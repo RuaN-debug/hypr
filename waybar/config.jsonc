@@ -1,41 +1,31 @@
-// Waybar config file
 {
-    "include": "~/.config/hypr/waybar/modules.jsonc",
-    "name": "main-bar",
-    "id": "main-bar",
-    "layer": "top",
-    "mode": "dock",
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": false,
-    "position": "top",
-    "height": 27,
-    "width": "",
-    "spacing": 0,
-    "margin": 0,
-    "margin-top": 5,
-    "margin-bottom": 0,
-    "margin-left": 10,
-    "margin-right": 10,
-    "fixed-center": true,
-    "ipc": true,
-    "modules-left": [
-        "cpu",
-        "temperature",
-        "memory",
-        "disk"
-    ],
-    "modules-center": [
-        "clock"
-        // "idle_inhibitor",
-    ],
-    "modules-right": [
-        // "tray",
-        "custom/spotify",
-        "battery",
-        "backlight",
-        "pulseaudio",
-        "network",
-        "wlr/workspaces"
-    ]
+  "include": "~/.config/hypr/waybar/modules.jsonc",
+  "name": "main-bar",
+  "id": "main-bar",
+  "layer": "top",
+  "mode": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": false,
+  "position": "top",
+  "height": 27,
+  "width": "",
+  "spacing": 0,
+  "margin": 0,
+  "margin-top": 5,
+  "margin-bottom": 0,
+  "margin-left": 10,
+  "margin-right": 10,
+  "ipc": true,
+  "fixed-center": true,
+  "modules-center": ["clock"],
+  "modules-left": ["cpu", "temperature", "memory", "disk"],
+  "modules-right": [
+    "custom/spotify",
+    "battery",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "wlr/workspaces"
+  ]
 }
