@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+
+if pgrep -x wofi > /dev/null; then
+    pkill -x wofi
+    exit 0
+fi
+
 set -u
 
 CONFIG="$HOME/.config/hypr/wofi/config.conf"
