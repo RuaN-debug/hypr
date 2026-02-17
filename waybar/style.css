@@ -1,19 +1,31 @@
-@import "styles/mocha.css";
+/* @import "styles/mocha.css"; */
+@import "../../.config/hypr/theme/current.css";
 
 /** ********** Fonts ********** **/
 * {
-	font-family: "JetBrains Mono", "Iosevka Nerd Font", archcraft, sans-serif;
-	font-size: 14px;
-	font-weight: bolder;
+	font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+	font-size: 13px;
+	font-weight: 400;
 	border-radius: 4px;
 	padding: 0px 2px;
+}
+
+#clock,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#network,
+#pulseaudio,
+#battery {
+	font-weight: 700;
 }
 
 /** ********** Waybar Window ********** **/
 window#waybar {
 	background-color: @Base;
 	transition-property: background-color;
-	transition-duration: .5s;
+	transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
@@ -34,8 +46,8 @@ window#waybar.hidden {
 #clock {
 	color: @Lavender;
 	font-size: 13px;
-    font-weight: bold;
-    padding: 0 10px;
+	font-weight: bold;
+	padding: 0 10px;
 }
 
 /** ********** CPU ********** **/
@@ -67,15 +79,16 @@ window#waybar.hidden {
 	color: @Surface0;
 }
 
-#tray>.passive {
+#tray > .passive {
 	-gtk-icon-effect: dim;
 }
 
-#tray>.needs-attention {
+#tray > .needs-attention {
 	-gtk-icon-effect: highlight;
 }
 
-#tray>.active {}
+#tray > .active {
+}
 
 /** ********** Pulseaudio ********** **/
 #pulseaudio {
@@ -100,11 +113,14 @@ window#waybar.hidden {
 	color: @Text;
 }
 
-#network.linked {}
+#network.linked {
+}
 
-#network.ethernet {}
+#network.ethernet {
+}
 
-#network.wifi {}
+#network.wifi {
+}
 
 /** ********** Battery ********** **/
 @keyframes blink {
@@ -140,10 +156,10 @@ window#waybar.hidden {
 }
 
 .custom-spotify {
-    padding: 0 10px;
-    margin: 0 4px;
-    background-color: #23b86d;
-    color: black;
+	padding: 0 10px;
+	margin: 0 4px;
+	background-color: #23b86d;
+	color: black;
 }
 
 /** ********** Custom ********** **/
@@ -165,3 +181,46 @@ window#waybar.hidden {
 #custom-power {
 	padding: 0px 8px;
 }
+
+/* Hover suave geral */
+#waybar * {
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+/* “Chip” no hover */
+#backlight:hover,
+#battery:hover,
+#clock:hover,
+#cpu:hover,
+#disk:hover,
+#memory:hover,
+#idle_inhibitor:hover,
+#tray:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#network:hover,
+#custom-menu:hover,
+#custom-power:hover {
+  background-color: rgba(255,255,255,0.06);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset;
+}
+
+/* Conectado */
+#network.wifi, #network.ethernet, #network.linked {
+  color: @Sky; /* ou outra cor do seu mocha.css */
+}
+
+/* Desconectado / desabilitado */
+#network.disconnected,
+#network.disabled {
+  color: @Red;
+  background-color: rgba(243, 139, 168, 0.10); /* tom vermelho suave */
+  box-shadow: 0 0 0 1px rgba(243, 139, 168, 0.18) inset;
+}
+
+#battery.low,
+#battery.warning,
+#battery.good {
+  animation: none;
+}
+

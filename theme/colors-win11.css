@@ -1,0 +1,19 @@
+@define-color Base rgba(18, 18, 22, 0.78);
+@define-color Surface0 rgba(30, 30, 36, 0.60);
+@define-color Surface1 rgba(50, 50, 60, 0.55);
+@define-color Text #E7E7EA;
+
+@define-color Blue #8AB4F8;
+@define-color Sky #7EE6FF;
+@define-color Green #7CFFA0;
+@define-color Yellow #FFE08A;
+@define-color Red #FF6B8A;
+
+@define-color Lavender #B8BFFF;
+@define-color Mauve #CBA6F7;
+@define-color Pink #FFB6E1;
+@define-color Teal #69F0D5;
+@define-color Flamingo #FFB4A2;
+@define-color Rosewater #FFD7C2;
+@define-color Surface2 rgba(255,255,255,0.12);
+@define-color Crust rgba(0,0,0,0.0);

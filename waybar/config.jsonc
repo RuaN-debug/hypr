@@ -26,6 +26,8 @@
     "backlight",
     "pulseaudio",
     "network",
-    "wlr/workspaces"
+    "wlr/workspaces",
+    "custom/menu",
+    "custom/power"
   ]
 }

@@ -1,83 +1,61 @@
 #!/usr/bin/env bash
+set -u
 
-## Wofi Powermenu
-
-## Files
 CONFIG="$HOME/.config/hypr/wofi/config.conf"
 STYLE="$HOME/.config/hypr/wofi/style.css"
-COLORS="$HOME/.config/hypr/wofi/colors"
 
-## Wofi Command
-wofi_command="wofi --show dmenu \
---conf ${CONFIG} --style ${STYLE} --color ${COLORS} \
---width=100 --height=217 \
---cache-file=/dev/null \
---hide-scroll --no-actions \
---define=matching=fuzzy"
+# Fecha qualquer wofi antigo (se não existir, segue)
+pkill -x wofi 2>/dev/null || true
 
-uptime=$(uptime -p | sed -e 's/up //g')
+uptime="$(uptime -p | sed -e 's/^up //g')"
 
-## Entries
-shutdown=" Shutdown"
-reboot=" Restart"
-lock=" Lock"
-suspend=" Sleep"
-logout=" Logout"
+shutdown="  Shutdown"
+reboot="  Restart"
+lock="  Lock"
+suspend="  Sleep"
+logout="  Logout"
 
-# Ask for confirmation
-cdialog() {
-  yad --title='Confirm?' --borders=15 --center --fixed --undecorated --button=Yes:0 --button=No:1 --text="Are you sure?" --text-align=center
+wofi_menu() {
+  wofi --show dmenu \
+    --prompt "$1" \
+    --conf "$CONFIG" --style "$STYLE" \
+    --width 320 --height 260 \
+    --cache-file /dev/null \
+    --hide-scroll --no-actions \
+    --define matching=fuzzy
 }
 
-# Variable passed to rofi
-open_menu() {
-  options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
+confirm() {
+  # retorna 0 se "Yes"
+  choice="$(printf "No\nYes\n" | wofi_menu "Confirm?")"
+  [[ "$choice" == "Yes" ]]
+}
 
-  chosen="$(echo -e "$options" | $wofi_command --prompt "UP - $uptime")"
-  case $chosen in
-  $shutdown)
-    cdialog
-    if [[ "$?" == 0 ]]; then
-      systemctl poweroff
-    else
-      exit
-    fi
+chosen="$(printf "%s\n%s\n%s\n%s\n%s\n" \
+  "$lock" "$suspend" "$logout" "$reboot" "$shutdown" | wofi_menu "UP - $uptime")"
+
+# Se o usuário apertou ESC/fechou
+[[ -z "${chosen:-}" ]] && exit 0
+
+case "$chosen" in
+  "$shutdown")
+    confirm && systemctl poweroff
     ;;
-  $reboot)
-    cdialog
-    if [[ "$?" == 0 ]]; then
-      systemctl reboot
-    else
-      exit
-    fi
+  "$reboot")
+    confirm && systemctl reboot
     ;;
-  $lock)
-    ~/.config/hypr/.scripts/lockscreen.sh
+  "$lock")
+    "$HOME/.config/hypr/.scripts/lockscreen.sh"
     ;;
-  $suspend)
-    cdialog
-    if [[ "$?" == 0 ]]; then
-      mpc -q pause
-      pulsemixer --mute
-      ~/.config/hypr/.scripts/lockscreen.sh
+  "$suspend")
+    if confirm; then
+      command -v mpc >/dev/null 2>&1 && mpc -q pause || true
+      command -v pulsemixer >/dev/null 2>&1 && pulsemixer --mute || true
+      "$HOME/.config/hypr/.scripts/lockscreen.sh"
       systemctl suspend
-    else
-      exit
     fi
     ;;
-  $logout)
-    cdialog
-    if [[ "$?" == 0 ]]; then
-      hyprctl dispatch exit 0
-    else
-      exit
-    fi
+  "$logout")
+    confirm && hyprctl dispatch exit 0
     ;;
-  esac
-}
-
-if [[ ! $(pidof wofi) ]]; then
-  open_menu
-else
-  pkill wofi
-fi
+esac
